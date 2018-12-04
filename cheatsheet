@@ -1,0 +1,5 @@
+git add *
+git status
+git commit -m "solution for day X"
+git push -u origin master
+
