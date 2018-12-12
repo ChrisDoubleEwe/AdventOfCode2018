@@ -1,11 +1,13 @@
 import re
 
-with open("12_a_input.txt") as f:
+with open("12_a_test.txt") as f:
     content = f.readlines()
 # you may also want to remove whitespace characters like `\n` at the end of each line
 content = [x.strip() for x in content]
 
 map = []
+seen = []
+totals = []
 
 line_no = 0
 first = ''
@@ -21,11 +23,13 @@ for line in content:
 
 state = first.split(' ')[2]  
 
-pad = '.........'
+pad = '.............................................................................................'
 pad_length = len(pad)
 
-state = pad + state + '......................'
-print ' 0 :  ' + state
+state = pad + state + '............................................................................................................................................................................................................................................................................................................................................................................................................................................................'
+
+print ' 0 :  ',
+print state
 
 new_map = []
 for item in map:
@@ -56,7 +60,8 @@ def do_replace(resul, s, m, r):
   return result
    
 
-for iter in range(1, 50000000001):
+totals.append(0)
+for iter in range(1, 921):
   final_state = state
   for item in map:
     result = do_replace(final_state, state, item[0], item[1])
@@ -84,10 +89,31 @@ for iter in range(1, 50000000001):
     print '',
   print iter,
   print ": ",
-  print state
+  print '',
+  #print state
 
-total = 0
-for i in range(0, len(state)):
-  if state[i] == '#':
-    total += i - pad_length
-print "Total = " + str(total) 
+  total = 0
+  for i in range(0, len(state)):
+    if state[i] == '#':
+      total += i - pad_length
+  print "Total = " + str(total) 
+  totals.append(total)
+
+# find pattern
+print "Finding pattern..."
+for offset in range(1, 100):
+ for step in range(1, 200):
+  diff = totals[offset+step] - totals[offset]
+  diff2 = totals[offset+step+step] - totals[offset+step]
+  diff3 = totals[offset+step+step+step] - totals[offset+step+step]
+
+  if diff == diff2 == diff3:
+    print "Offset: " + str(offset)
+    print "Checking: " + str(totals[offset]) + " - " + str(totals[offset+step]) + " - " + str(totals[offset+step+step])
+    print "   diffs: " + str(diff) + " - " + str(diff2) + " - " + str(diff3)
+
+    print "Step " + str(step) + " looks like a good bet"
+
+# Offset 86, then every 20?
+for x in range(1, 100):
+  print totals[86+(x*20)]
