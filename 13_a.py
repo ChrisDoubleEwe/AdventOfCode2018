@@ -48,21 +48,36 @@ for row in content:
       c = "-"
     new_row.append(c)
   map.append(new_row)
-print carts
 
 #for r in map:
   #print r
-#print carts
 
 def move_carts():
   for cart in carts:
     dir = cart[0]
+    if dir == '':
+      print "Error: unknown direction"
+      print carts
+      exit()
     cart_x = cart[1]
     cart_y = cart[2]
     turn = cart[3]
+    last_x = cart_x
+    last_y = cart_y
+    if turn < 0 or turn > 2:
+      print "Error: unknown turn"
+      print carts
+      exit()
+
+     
 
     #print " x= " + str(cart_x) + " y= " + str(cart_y)
     track = map[cart_y][cart_x]
+    if track not in '-|/\\+':
+      print "Error: cart off track"
+      print carts
+      exit()
+
     if track == '-':
       if dir == '<':
         cart_x = cart_x - 1
@@ -75,7 +90,7 @@ def move_carts():
         cart_y = cart_y + 1
     if track == '/':
       if dir == '^':
-        cart_x = cart_x - 1
+        cart_x = cart_x + 1
         dir = '>'
       elif dir == 'v':
         cart_x = cart_x - 1
@@ -115,6 +130,7 @@ def move_carts():
           cart_y = cart_y - 1
           new_dir = '^'
       if turn == 1: # STRAIGHT
+        new_dir = dir
         if dir == 'v':
           cart_y = cart_y + 1
         if dir == '^':
@@ -122,7 +138,7 @@ def move_carts():
         if dir == '<':
           cart_x = cart_x - 1
         if dir == '>':
-          cart_y = cart_y + 1
+          cart_x = cart_x + 1
       if turn == 2: # RIGHT
         if dir == 'v':
           cart_x = cart_x - 1
@@ -144,8 +160,13 @@ def move_carts():
     cart[1] = cart_x
     cart[2] = cart_y
     cart[3] = turn
+    if cart_x == last_x and cart_y == last_y:
+      print "Error! Cart has stalled"
+      print carts
+      exit()
 
 def check_crash():
+  deleteList = []
   for i in range(0, len(carts)):
     for j in range(0, len(carts)):
       cart1 = carts[i]
@@ -154,8 +175,22 @@ def check_crash():
         if cart1[2] == cart2[2]:
           if i != j:
             print "CRASH!   " + str(cart1[1]) + "," + str(cart2[2])
-            exit()
+            deleteList.append(i)
+            deleteList.append(j)
+  mylist = sorted(deleteList, key=int, reverse=True)
+  mylist = list(set(mylist))
+  mylist = sorted(mylist, key=int, reverse=True)
 
+  for item in mylist:
+    del carts[item]
+  if len(carts) == 1:
+    print "FINISHED!"
+    print carts
+    exit()
+  if len(carts) < 1:
+    print "Error: all carts destroyed!"
+    exit()
+ 
 iter = 0
 while True:
   iter += 1
