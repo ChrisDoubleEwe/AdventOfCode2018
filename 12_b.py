@@ -1,6 +1,6 @@
 import re
 
-with open("12_a_test.txt") as f:
+with open("12_a_input.txt") as f:
     content = f.readlines()
 # you may also want to remove whitespace characters like `\n` at the end of each line
 content = [x.strip() for x in content]
@@ -101,8 +101,8 @@ for iter in range(1, 921):
 
 # find pattern
 print "Finding pattern..."
-for offset in range(1, 100):
- for step in range(1, 200):
+for offset in range(1, 202):
+ for step in range(1, 201):
   diff = totals[offset+step] - totals[offset]
   diff2 = totals[offset+step+step] - totals[offset+step]
   diff3 = totals[offset+step+step+step] - totals[offset+step+step]
@@ -115,5 +115,21 @@ for offset in range(1, 100):
     print "Step " + str(step) + " looks like a good bet"
 
 # Offset 86, then every 20?
-for x in range(1, 100):
+for x in range(1, 20):
   print totals[86+(x*20)]
+
+print '-------'
+for x in range(0, 10):
+  iter = 200 + (50*x)
+  guess = totals[200] + (x) * 2750
+  print str(iter) + " " + str(totals[200+(x*50)]) + ' ' + str(guess)
+
+print '-------'
+
+base = totals[200]
+inc = ((50000000000 -200) / 50) * 2750 
+
+result = base + inc
+
+print '-------'
+print result
