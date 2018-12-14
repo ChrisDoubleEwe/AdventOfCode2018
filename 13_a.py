@@ -174,7 +174,7 @@ def check_crash():
       if cart1[1] == cart2[1]:
         if cart1[2] == cart2[2]:
           if i != j:
-            print "CRASH!   " + str(cart1[1]) + "," + str(cart2[2])
+            print "CRASH! on tick " + str(iter) + "    " + str(cart1[1]) + "," + str(cart2[2])
             deleteList.append(i)
             deleteList.append(j)
   mylist = sorted(deleteList, key=int, reverse=True)
