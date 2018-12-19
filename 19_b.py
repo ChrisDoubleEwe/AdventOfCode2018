@@ -6,7 +6,7 @@ all_op_codes = ['addr', 'addi', 'mulr', 'muli', 'banr', 'bani', 'borr', 'bori', 
 
 ip_reg = -1
 prog = []
-regs = [0, 0, 0, 0, 0, 0]
+regs = [1, 0, 0, 0, 0, 0]
 
 with open("19_a_input.txt") as f:
   for line in f:
@@ -136,7 +136,7 @@ def do_instruction(opcode, op1, op2, op3):
   print regs
    
 #run program
-ip = 0
+ip = regs[ip_reg]
 while True:
   if ip > len(prog):
     print "IP overflow"
