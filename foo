@@ -1,0 +1,37 @@
+#ip 3
+
+     seti 123 0 5            / R5 = 123
+     bani 5 456 5            / R5 = [R5} AND 456
+     eqri 5 72 5             / if R5 == 72 then goto YES else goto NO
+     addr 5 3 3              / R3 = R5 + R3 (PC)
+NO:  seti 0 0 3              / R3 -> 0
+YES: seti 0 5 5
+
+     bori 5 65536 2
+     seti 10362650 3 5
+     bani 2 255 4
+     addr 5 4 5
+     bani 5 16777215 5
+     muli 5 65899 5
+     bani 5 16777215 5
+     gtir 256 2 4
+     addr 4 3 3
+     addi 3 1 3
+     seti 27 4 3
+     seti 0 3 4
+     addi 4 1 1
+     muli 1 256 1
+     gtrr 1 2 1
+     addr 1 3 3
+     addi 3 1 3
+     seti 25 2 3
+     addi 4 1 4
+     seti 17 7 3
+     setr 4 0 2
+     seti 7 8 3
+     eqrr 5 0 4         / If R0 == R5 then R4 = 1 else R4 = 0
+     addr 4 3 3         / R3 = R4 + R3 ! JUMP
+     seti 5 1 3         / PC = 5
+
+
+10362650 -> 16098955
