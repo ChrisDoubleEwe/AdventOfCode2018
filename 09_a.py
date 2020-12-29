@@ -1,7 +1,7 @@
 import re
 
-num_players = 465
-last_marble = 71498
+num_players = 413
+last_marble = 71082
 
 game = [0, 4, 2, 1, 3]
 current_marble_pos = 1
