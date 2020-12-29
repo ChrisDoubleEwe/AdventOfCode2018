@@ -11,9 +11,9 @@ max_x = target_x + 15
 max_y = target_y + 15
 
 
-depth=510
-target_x=10
-target_y=10
+depth=11541
+target_x=14
+target_y=778
 max_x = target_x + 15
 max_y = target_y + 15
 

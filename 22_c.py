@@ -2,8 +2,8 @@ import re
 def ints(s):
     return list(map(int, re.findall(r"-?\d+", s)))  # thanks mserrano!
 inp = """
-depth: 10689
-target: 11,722
+depth=11541
+target=14,778
 """.strip()
 lines = inp.splitlines()
 depth = ints(lines[0])[0]

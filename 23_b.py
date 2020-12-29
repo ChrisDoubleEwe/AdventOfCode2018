@@ -5,7 +5,7 @@ import sys
 from copy import copy, deepcopy
 
 
-with open("23_b_test.txt") as f:
+with open("23_b_input.txt") as f:
     content = f.readlines()
 # you may also want to remove whitespace characters like `\n` at the end of each line
 content = [x.strip() for x in content]

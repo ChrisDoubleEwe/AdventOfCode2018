@@ -43,6 +43,7 @@ timerow = ['.'] * 60
 
 
 def fill(list, start, stop):
+  print "  Filling from " + str(start) + " to " + str(stop)
   for i in range(start, stop):
     list[i]='#'
 
@@ -52,9 +53,11 @@ this_date = ''
 for shift in shifts:
   # Have we got a new guard starting duty?
   if shift[0] != '-':
+    print "New guard"
     # Yes, it's a new guard.
     if asleep == 1:
       fill(timerow, current_min, 60)
+      print timerow
       newrow = []
       newrow.append(this_date)
       newrow.append(guard_number)
@@ -62,6 +65,7 @@ for shift in shifts:
       rows.append(newrow)
       timerow = ['.'] * 60
     else:
+      print timerow
       newrow = []
       newrow.append(this_date)
       newrow.append(guard_number)
@@ -82,6 +86,7 @@ for shift in shifts:
 
   # Has the guard fallen asleep?
   if shift[4] == 'falls asleep':
+    print "  Guard falls asleep"
     asleep = 1
     if int(shift[2])>0:
       current_min=0
@@ -90,31 +95,13 @@ for shift in shifts:
 
   # Has the guard woken up?
   if shift[4] == 'wakes up':
+    print "  Guard wakes up"
     asleep = 0
     fill(timerow, current_min, int(shift[3]))
     if shift[2]>0:
       current_min=0
     else:
       current_min=int(shift[3])
-
-# Close out last shift
-if asleep == 1:
-  fill(timerow, current_min, 60)
-  newrow = []
-  newrow.append(this_date)
-  newrow.append(guard_number)
-  newrow.append(timerow)
-  rows.append(newrow)
-  timerow = ['.'] * 60
-else:
-  newrow = []
-  newrow.append(this_date)
-  newrow.append(guard_number)
-  newrow.append(timerow)
-  rows.append(newrow)
-  timerow = ['.'] * 60
-
-
 
 # Print output
 rows.pop(0)
@@ -174,43 +161,5 @@ guard_num = guard_parts[1]
 
 out = int(guard_num) * max_min
 
-print "RESULT = " + str(out)
-
-results = []
-for guard in guards:
-  times = []
-  for i in range(0,60):
-    count = 0
-    for row in rows:
-      if row[1] == guard:
-        if row[2][i] == '#':
-          count = count + 1
-    times.append(count)
-  result_row = []
-  result_row.append(guard)
-  result_row.append(times)
-  results.append(result_row) 
-
-print results
-
-max_min = 0
-max_minute = 0
-max_guard = ''
-for r in results:
-  for i in range(0, 60):
-    print "This: " + str(r[1][i]) + " ; Current max = " + str(max_min)
-    if int(r[1][i]) > int(max_min):
-      print "Max min!"
-      max_min = r[1][i]
-      max_minute = i 
-      max_guard = r[0]
-
-print "Max asleep mins = " + str(max_min)
-print "Guard = " + max_guard
-print "In minute = " + str(max_minute)
-
-guard_parts = max_guard.split('#')
-guard_num = guard_parts[1]
-out = int(guard_num) * max_minute
 print "RESULT = " + str(out)
 

@@ -4,9 +4,9 @@ import os
 import sys
 from copy import copy, deepcopy
 
-depth=10689
-target_x=11
-target_y=722
+depth=11541
+target_x=14
+target_y=778
 max_x = target_x + 100
 max_y = target_y + 100
 
