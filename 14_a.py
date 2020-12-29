@@ -3,6 +3,7 @@ import re
 recipes = []
 recipes.append(3)
 recipes.append(7)
+
 #recipes.append(3)
 #recipes.append(8)
 #recipes.append(0)
@@ -18,7 +19,7 @@ def elfAdd():
   for i in range(0, len(elves)):
     add = recipes[elves[i]]
     new_pos = (elves[i] + add +1) % len(recipes)
-    #print "  Elf " + str(i)+ ": Adding " + str(add) + " to " + str(elves[i]) + " to give " + str(new_pos) 
+    print "  Elf " + str(i)+ ": Adding " + str(add) + " to " + str(elves[i]) + " to give " + str(new_pos) 
     elves[i] = new_pos
     
 
@@ -40,7 +41,7 @@ def score():
     total = total + str(recipes[i])
   print "TOTAL = " + total
  
-max = 380621
+max = 430971
 
 iter = 0
 while True:
