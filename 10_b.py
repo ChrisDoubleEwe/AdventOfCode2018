@@ -84,6 +84,7 @@ def finish():
 
   print display
 
+  print data
   for x in data:
     pos = x[0]
     pos_x = pos[0]
@@ -94,8 +95,8 @@ def finish():
   print "rendering..."
   for x in display:
     line = ''.join(x)
-    line = line[60:]
-    line = line[:-30]
+    #line = line[60:]
+    #line = line[:-30]
     print line
 
 min_height = 10000000
